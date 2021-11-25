@@ -21261,7 +21261,7 @@ w_metadata nt351 settings \
 load_nt351()
 {
     w_package_unsupported_win64
-    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" "" "5.7"
+    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" ,5.7
     w_set_winver nt351
 }
 
@@ -21297,7 +21297,7 @@ w_metadata win20 settings \
 load_win20()
 {
     w_package_unsupported_win64
-    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" "" "5.7"
+    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" ,5.7
     w_set_winver win20
 }
 
@@ -21355,7 +21355,7 @@ w_metadata win30 settings \
 load_win30()
 {
     w_package_unsupported_win64
-    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" "" "5.7"
+    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" ,5.7
     w_set_winver win30
 }
 
@@ -21448,7 +21448,7 @@ w_metadata winme settings \
 load_winme()
 {
     w_package_unsupported_win64
-    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" "" "5.7"
+    w_package_broken "https://bugs.winehq.org/show_bug.cgi?id=41559" ,5.7
     w_set_winver winme
 }
 
