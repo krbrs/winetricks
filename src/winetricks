@@ -785,6 +785,18 @@ w_try_readlinkf(){
     fi
 }
 
+w_try_realpath(){
+    if [ -x "$(command -v grealpath 2>/dev/null)" ]; then
+        grealpath "$@"
+    elif [ -x "$(command -v realpath 2>/dev/null)" ]; then
+        realpath "$@"
+    elif [ "$(uname -s)" = "Darwin" ]; then
+        perl -MCwd -e 'print Cwd::realpath shift' "$@"
+    else
+        w_die "Cannot find realpath.  Please install it (e.g. 'sudo apt-get install coreutils' or 'sudo yum install coreutils')."
+    fi
+}
+
 w_try_msiexec64()
 {
     if test "${W_ARCH}" != "win64"; then
