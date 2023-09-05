@@ -14842,6 +14842,44 @@ load_dxwnd()
 
 #----------------------------------------------------------------
 
+w_metadata eadesktop apps \
+    title="EA Desktop app" \
+    publisher="EA" \
+    year="2022" \
+    media="download" \
+    file1="EAappInstaller.exe" \
+    installed_file1="${W_PROGRAMS_WIN}/Electronic Arts/EA Desktop/EA Desktop/EALauncher.exe" \
+    homepage="https://www.ea.com"
+
+load_eadesktop()
+{
+    # Need to force wine-8.0 as EALauncher doesn't run below WineCX23 (WoW64)
+    if [ "$(uname -s)" = "Darwin" ] && w_wine_version_in ,8.0 ; then
+        w_die "${W_PACKAGE} requires wine version 8.0 (or newer)"
+    fi
+
+    w_download https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EAappInstaller.exe
+
+    w_try_cd "${W_CACHE}/${W_PACKAGE}"
+    WINEDLLOVERRIDES=EALauncher.exe=d "${WINE}" "${file1}" ${W_OPT_UNATTENDED:+/SILENT}
+
+    w_call corefonts
+    w_call d3dcompiler_47
+
+    w_warn "Stop Steam from installing EA app"
+    cat > "${W_TMP}"/ea-app.reg <<_EOF_
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\\Software\\Electronic Arts\\EA Desktop]
+"InstallSuccessful"="true"
+
+_EOF_
+    w_try_regedit "${W_TMP}"/ea-app.reg
+
+}
+
+#----------------------------------------------------------------
+
 w_metadata emu8086 apps \
     title="emu8086" \
     publisher="emu8086.com" \
